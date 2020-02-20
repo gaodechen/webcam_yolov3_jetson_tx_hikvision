@@ -26,10 +26,8 @@ class Model():
         self.classes = load_classes('data/coco.names')
         self.colors = pkl.load(open("pallete", "rb"))
 
-        print("pre-trained model loading ...")
         self.model = Darknet(self.cfgfile)
         self.model.load_weights(self.weightsfile)
-        print("model loaded successfully")
 
         self.model.net_info["height"] = self.reso
         self.inp_dim = int(self.model.net_info["height"])
