@@ -14,14 +14,14 @@
 * Intel CPU + NVIDA GPU
 * 视频源：RTSP/RTMP网络摄像头
 
-<img align=center width="100px" src="https://github.com/gaodechen/webcam_yolov3_jetson_tx_hikvision/blob/master/demo_1.png" />
+<div align=center><img width="500px" src="https://github.com/gaodechen/webcam_yolov3_jetson_tx_hikvision/blob/master/demo_1.png" /></div>
 
 
 ## 使用
 
 ### 多网络摄像头拉流 + YOLO v3对象检测
 
-首先clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)，下载YOLO v3预训练模型，直接将本项目的.py文件放进`pytorch-yolo-v3`文件夹当中。
+首先clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)的对象检测实现，下载YOLO v3预训练模型，直接将本项目的.py文件放进`pytorch-yolo-v3`文件夹当中。
 
 - `yolov3.py`是对`pytorch-yolo-v3`模型推断的二次封装，不需要变动
 - `settings.py`当中修改IP camera地址列表，画面大小
@@ -45,16 +45,6 @@ processes = [
     mp.Process(target=pop_image, args=(raw_q, window_name)),
 ]
 ```
-
-## Uasge on Jetson TX 2 ARM
-
-### 运行环境
-
-* 硬件平台: Jetson TX2 ARM
-* 操作系统：Ubuntu 18.04
-* 视频源: 多个海康网络摄像头(RTSP TCP)
-
-<img align=center width="100px" src="https://github.com/gaodechen/webcam_yolov3_jetson_tx_hikvision/blob/master/demo_2.jpg" />
 
 ## 其他细节
 
@@ -110,9 +100,18 @@ def push_image(raw_q, cam_addr):
 
 最后观察发现，由于**Jetson TX2内存不足**，导致进程无法创建。**解决方法：创建内存交换区**。目测4个海康摄像头进行YOLO对象检测时，6G交换区足够。
 
+## Jetson TX 2 ARM
+
+### 运行环境
+
+* 硬件平台: Jetson TX2 ARM
+* 操作系统：Ubuntu 18.04
+* 视频源: 多个海康网络摄像头(RTSP TCP)
+
+<div align=center><img width="500px" src="https://github.com/gaodechen/webcam_yolov3_jetson_tx_hikvision/blob/master/demo_2.jpg" /></div>
+
 ### Jetson TX2 ARM PyTorch环境的搭建
 
 `git clone --recursive`以及compile太耗时了！而且板子上网速也慢，读写也慢。好在最终找到了可以用的whl安装包，直接`pip install`一次成功。
 
 PyTorch .whl downloading & installation on Jetson TX2: [CSDN Blog](https://blog.csdn.net/beckhans/article/details/91386429)
-
