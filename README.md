@@ -114,4 +114,4 @@ def push_image(raw_q, cam_addr):
 
 `git clone --recursive`以及compile太耗时了！而且板子上网速也慢，读写也慢。好在最终找到了可以用的whl安装包，直接`pip install`一次成功。
 
-PyTorch .whl downloading & installation on Jetson TX2: [CSDN Blog](https://blog.csdn.net/beckhans/article/details/91386429)
+- **PyTorch .whl downloading & installation on Jetson TX2**: [CSDN Blog](https://blog.csdn.net/beckhans/article/details/91386429)
