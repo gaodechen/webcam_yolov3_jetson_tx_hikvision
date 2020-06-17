@@ -21,10 +21,11 @@
 
 ### 多网络摄像头拉流 + YOLO v3对象检测
 
-首先clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)的对象检测实现，下载YOLO v3预训练模型，直接将本项目的.py文件放进`pytorch-yolo-v3`文件夹当中。
+首先clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)的对象检测实现，下载YOLO v3预训练模型，直接将本项目文件覆盖放入`pytorch-yolo-v3`文件夹当中。
 
 - `yolov3.py`是对`pytorch-yolo-v3`模型推断的二次封装，不需要变动
 - `settings.py`当中修改IP camera地址列表，画面大小
+- `preprocess.py`添加了prep_frame函数，与prep_image不同只是图片输入从文件改为cv2图像
 
 运行：
 
