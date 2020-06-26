@@ -103,7 +103,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # load configurations
-    from settings_ import cam_addrs, img_shape
+    from settings import cam_addrs, img_shape
     args.single_window = True if args.single_window.lower() == 'true' else False
     args.num_cameras = len(cam_addrs) if args.num_cameras is None else args.num_cameras
 
