@@ -8,6 +8,12 @@
 - **YOLO v3 implementation**: [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)
 - **HIKVISION multiple IP cameras**: [Yonv1943/Python](https://github.com/Yonv1943/Python/tree/master/Demo_camera_and_network)
 
+## 配合其他模型
+
+同样的拉流代码同样可以复用在EfficientDet、YoloV5等模型上，不过模型需要二次封装。
+
+- **EfficientDet implementation**: [gaodechen/EfficientDet-Webcam](https://github.com/gaodechen/EfficientDet-Webcam)
+- **YoloV5**: YoloV5性能要高出4-5倍，官方实现当中使用的DataLoader，故而修改时去掉了拉流取图的进程。
 
 ## 测试环境
 
