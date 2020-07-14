@@ -13,7 +13,7 @@
 同样的拉流代码同样可以复用在EfficientDet、YoloV5等模型上，不过模型需要二次封装。
 
 - **EfficientDet implementation**: [gaodechen/EfficientDet-Webcam](https://github.com/gaodechen/EfficientDet-Webcam)
-- **YoloV5**: YoloV5工作对性能的对比缺乏参照，但其实现依旧有启发性。官方实现当中使用的DataLoader，故而修改时去掉了拉流取图的进程。
+- **YoloV5**: YoloV5工作对性能的对比缺乏参照，但其实现依旧有启发性。推断前使用DataLoader，故而修改时去掉了拉流取图的进程。
 
 ## 测试环境
 
