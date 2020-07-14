@@ -13,7 +13,7 @@
 同样的拉流代码同样可以复用在EfficientDet、YoloV5等模型上，不过模型需要二次封装。
 
 - **EfficientDet implementation**: [gaodechen/EfficientDet-Webcam](https://github.com/gaodechen/EfficientDet-Webcam)
-- **YoloV5**: YoloV5性能要高出4-5倍，官方实现当中使用的DataLoader，故而修改时去掉了拉流取图的进程。
+- **YoloV5**: YoloV5工作对性能的对比缺乏参照，但其实现依旧有启发性。官方实现当中使用的DataLoader，故而修改时去掉了拉流取图的进程。
 
 ## 测试环境
 
@@ -121,4 +121,4 @@ def push_image(raw_q, cam_addr):
 
 `git clone --recursive`以及compile太耗时了！而且板子上网速也慢，读写也慢。好在最终找到了可以用的whl安装包，直接`pip install`一次成功。
 
-- **PyTorch .whl downloading & installation on Jetson TX2**: [CSDN Blog](https://blog.csdn.net/beckhans/article/details/91386429)
+- **PyTorch .whl downloading & installation on Jetson TX2**: [Nvidia Forum](https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-5-0-now-available/72048)
