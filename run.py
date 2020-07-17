@@ -33,9 +33,13 @@ def push_image(raw_q, cam_addr):
 def predict(raw_q, pred_q):
     model = Model()
     while True:
+        tic = time.time()
         raw_img = raw_q.get()
         pred_img = model.predict(raw_img)
         pred_q.put(pred_img)
+        toc = time.time()
+        time_cost = toc - tic
+        print('Processed in %.3fs FPS = %.3f' % (time_cost, 1 / time_cost))
 
 
 def pop_image(pred_q, window_name, img_shape):
@@ -72,7 +76,6 @@ def combine_images(queue_list, window_name, img_shape):
         y = np.concatenate(imgs[-(num_cameras-num_cameras//2):], axis=1)
         imgs = np.concatenate([x, y], axis=0)
         cv2.imshow(window_name, imgs)
-        # cv2.imwrite('test.jpg', imgs)
         cv2.waitKey(1)
 
 

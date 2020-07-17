@@ -27,23 +27,24 @@
 
 ### 多网络摄像头拉流 + YOLO v3对象检测
 
-首先clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)的对象检测实现，下载YOLO v3预训练模型，直接将本项目文件覆盖放入`pytorch-yolo-v3`文件夹当中。
-
-- `yolov3.py`是对`pytorch-yolo-v3`模型推断的二次封装，不需要变动
-- `settings.py`当中修改IP camera地址列表，画面大小
-- `preprocess.py`添加了prep_frame函数，与prep_image不同只是图片输入从文件改为cv2图像
+* clone [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3)的对象检测实现
+* 下载YOLO v3预训练模型yolov3.weights
+* 将本项目文件覆盖放入`pytorch-yolo-v3`文件夹当中
+* 修改`settings.py`，加入你的摄像头地址
 
 运行：
 
-```
-python run.py --single_window=True (or False)
+```bash
+python run.py                          # Default detect and display all cameras in one window
+python run.py --single_window=False    # OR Detect and display in separate windows
 ```
 
-使用`single_window`则所有画面合并显示到同一个窗口当中。
+* `single_window`默认为True，表示所有画面合并显示到同一个窗口当中
+* `num_cameras`默认值为settings.py中的IP列表大小，表示处理所有给定摄像头
 
 ### 仅多摄像头拉流
 
-去掉`predict()`进程的调用，并且`pop_image()`显示`raw_q`中的原图像。
+去掉`predict()`进程的调用，并且`pop_image()`显示`raw_q`中的原图像。也就是说拉流取得的图像直接取出进行显示。
 
 ```python
 processes = [
@@ -52,6 +53,25 @@ processes = [
     mp.Process(target=pop_image, args=(raw_q, window_name)),
 ]
 ```
+
+### 帧率
+
+摄像头本身具有帧率，而模型检测也存在帧率。摄像头帧率可以通过cv2属性获取：
+
+```python
+fps = cap.get(cv2.CAP_PROP_FPS)
+```
+
+另外此处我们采用的帧率计算方法是，直接使用`predict()`进程的推断时间来计算帧率，此方法包含的耗时，包含队列取图时阻塞的时间，以及模型推断时间。
+
+### 文件结构
+
+本程序文件当中主要如下：
+
+- `settings.py`：配置IP camera地址列表，画面大小
+- `yolov3.py`：`pytorch-yolo-v3`模型推断的二次封装，不需要变动
+- `preprocess.py`：与pytorch-yolo-v3相比，只是添加了prep_frame函数，将图片输入从文件改为cv2图像
+
 
 ## 其他细节
 
